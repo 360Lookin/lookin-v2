@@ -235,7 +235,7 @@ export default function KahakaiCaseStudy() {
         <Link href="/" className={styles.wordmark}>look<span>in</span><i>.</i></Link>
         <p>Websites, content and practical digital growth from New Plymouth.</p>
         <Link href="/#work">More selected work <ArrowRight /></Link>
-        <small>© {new Date().getFullYear()} Lookin. All rights reserved.</small>
+        <small><Link href="/privacy">Privacy statement</Link> · © {new Date().getFullYear()} Lookin. All rights reserved.</small>
       </footer>
     </main>
   );

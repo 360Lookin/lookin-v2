@@ -14,13 +14,17 @@ import styles from "@/components/ContactPage.module.css";
 const BOOKING_URL = "https://calendar.app.google/R1LZCQ1HcVA2joeG7";
 
 export const metadata: Metadata = {
-  title: "Contact Lookin | Website Design New Plymouth",
+  title: "Contact | Website Design New Plymouth",
   description:
     "Tell Lookin about your website, content or digital growth project, or book a free Website Discovery Session with Tamron Gardner.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "Start a project with Lookin",
     description:
       "Share what you need help with and get a practical next step for your website or digital project.",
+    url: "/contact",
     type: "website",
   },
 };
@@ -71,7 +75,7 @@ export default function ContactPage() {
 
       <footer className={styles.footer}>
         <span>Websites, content and practical digital growth from New Plymouth.</span>
-        <span>© {new Date().getFullYear()} Lookin. All rights reserved.</span>
+        <span><Link href="/privacy">Privacy statement</Link> · © {new Date().getFullYear()} Lookin. All rights reserved.</span>
       </footer>
     </main>
   );

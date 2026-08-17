@@ -1,6 +1,7 @@
 "use client";
 
 import { type FormEvent, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import styles from "./ContactPage.module.css";
 
@@ -115,7 +116,12 @@ export default function ContactForm() {
           role={status === "error" ? "alert" : "status"}
           aria-live="polite"
         >
-          {status === "idle" && <p>By sending this form, you agree that I may use these details to reply to your enquiry.</p>}
+          {status === "idle" && (
+            <p>
+              I will use these details to reply to your enquiry and handle them as described
+              in the <Link href="/privacy">privacy statement</Link>.
+            </p>
+          )}
           {status === "submitting" && <p>Sending your enquiry...</p>}
           {status === "success" && (
             <p className={styles.successMessage}><CheckCircle weight="fill" />Thanks. Your enquiry has been sent and I will reply soon.</p>

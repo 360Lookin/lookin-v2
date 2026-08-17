@@ -392,7 +392,7 @@ export default function LookinHome() {
       <footer className="site-footer content-width">
         <a href="#top" className="wordmark wordmark-footer">look<span>in</span><i>.</i></a>
         <p>Websites, content and practical digital growth from New Plymouth to businesses across New Zealand.</p>
-        <div><a href="mailto:hello@lookin.nz">hello@lookin.nz</a><a href="tel:+64273447853">027 344 7853</a></div>
+        <div><a href="mailto:hello@lookin.nz">hello@lookin.nz</a><a href="tel:+64273447853">027 344 7853</a><Link href="/privacy">Privacy statement</Link></div>
         <small>© {new Date().getFullYear()} Lookin. All rights reserved.</small>
       </footer>
     </main>

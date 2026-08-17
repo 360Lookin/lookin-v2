@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kahakai Blog Interview</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&amp;family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --accent: #1e6b5a;
+  --accent-ink: #ffffff;
+  --bg: #faf7f1;
+  --card: #ffffff;
+  --input: #fdfcfa;
+  --ink: #262420;
+  --muted: #6f6961;
+  --line: #e8e1d6;
+  --error: #a93b2e;
+  --success-wash: #edf5f1;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(38, 36, 32, .05), 0 12px 32px -12px rgba(38, 36, 32, .14);
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.progress-rail {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(250, 247, 241, .94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.progress-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: .85rem 1.25rem .8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.progress-label {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.section-name {
+  overflow: hidden;
+  color: var(--muted);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.save-note {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--muted);
+  font-size: .75rem;
+  white-space: nowrap;
+}
+
+.save-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .35;
+  transition: opacity .2s;
+}
+
+.save-indicator.active { opacity: 1; }
+
+.progress-track {
+  height: 3px;
+  background: var(--line);
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background: var(--accent);
+  transition: width .35s cubic-bezier(.4, 0, .2, 1);
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+.step { display: none; }
+
+.step.active {
+  display: block;
+  animation: rise .32s cubic-bezier(.25, .6, .3, 1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.eyebrow {
+  margin: 0 0 .5rem;
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -.015em;
+}
+
+h1,
+h2 { margin: 0 0 .6rem; font-weight: 600; }
+h1 { font-size: clamp(1.9rem, 5.5vw, 2.6rem); }
+h2 { font-size: clamp(1.55rem, 4.5vw, 2.05rem); }
+
+.lede {
+  max-width: 58ch;
+  margin: 0 0 1.75rem;
+  color: var(--muted);
+}
+
+.card {
+  padding: 1.5rem 1.35rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.field { margin-bottom: 1.45rem; }
+.field:last-child { margin-bottom: 0; }
+
+label,
+.group-label,
+legend {
+  display: block;
+  margin-bottom: .4rem;
+  font-size: .94rem;
+  font-weight: 600;
+}
+
+.hint {
+  display: block;
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: .83rem;
+  font-weight: 400;
+}
+
+.optional {
+  color: var(--muted);
+  font-size: .83rem;
+  font-weight: 400;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: .72rem .82rem;
+  color: var(--ink);
+  background: var(--input);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+textarea {
+  min-height: 116px;
+  resize: vertical;
+}
+
+textarea.tall { min-height: 150px; }
+
+select {
+  appearance: none;
+  padding-right: 2.3rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 16px) calc(50% - 2px), calc(100% - 11px) calc(50% - 2px);
+  background-repeat: no-repeat;
+  background-size: 5px 5px, 5px 5px;
+}
+
+input:hover,
+select:hover,
+textarea:hover { border-color: #cfc7b9; }
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+
+[aria-invalid="true"] { border-color: var(--error) !important; }
+
+.error-msg {
+  display: none;
+  margin: .35rem 0 0;
+  color: var(--error);
+  font-size: .83rem;
+}
+
+.error-msg.show { display: block; }
+
+fieldset {
+  margin: 0 0 1.45rem;
+  padding: 0;
+  border: 0;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .3rem;
+}
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .65rem;
+  padding: .5rem 0;
+  font-weight: 400;
+}
+
+.check-row input {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin-top: .22rem;
+  accent-color: var(--accent);
+}
+
+.check-row strong { font-weight: 600; }
+
+.conditional {
+  display: none;
+  margin-top: .9rem;
+  padding: 1rem;
+  background: var(--success-wash);
+  border-radius: 10px;
+}
+
+.conditional.visible { display: block; }
+
+.file-note {
+  margin: .6rem 0 0;
+  padding: .65rem .8rem;
+  color: var(--muted);
+  background: var(--success-wash);
+  border-radius: 10px;
+  font-size: .83rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: 1.6rem;
+}
+
+.btn {
+  padding: .8rem 1.7rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: .98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .15s, background .15s, opacity .15s;
+}
+
+.btn:active:not(:disabled) { transform: scale(.98); }
+
+.btn-primary {
+  margin-left: auto;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  box-shadow: 0 6px 18px -8px rgba(30, 107, 90, .7);
+}
+
+.btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+
+.btn-primary:disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: .42;
+}
+
+.btn-back {
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+.btn-back:hover { border-color: var(--muted); }
+
+.btn-secondary {
+  color: var(--accent);
+  background: transparent;
+  border: 1.5px solid var(--accent);
+}
+
+.btn-secondary:hover { background: var(--success-wash); }
+
+.nav-hint,
+.submit-status {
+  min-height: 1.25em;
+  margin: .7rem 0 0;
+  color: var(--muted);
+  font-size: .83rem;
+}
+
+.submit-status.error { color: var(--error); }
+
+.review-section {
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.review-section:first-child { padding-top: 0; }
+.review-section:last-child { padding-bottom: 0; border-bottom: 0; }
+
+.review-section h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 .5rem;
+  font-size: 1.05rem;
+}
+
+.review-edit {
+  padding: .2rem .3rem;
+  color: var(--accent);
+  background: transparent;
+  border: 0;
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.review-edit:hover { text-decoration: underline; }
+
+.review-section dl { margin: 0; font-size: .92rem; }
+.review-section dt { margin-top: .55rem; font-weight: 600; }
+.review-section dd {
+  margin: 0;
+  color: var(--muted);
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.confirm {
+  padding: 2.5rem 0;
+  text-align: center;
+}
+
+.confirm-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  min-height: 44px;
+  margin-bottom: 1.25rem;
+  padding: .65rem 1rem;
+  color: var(--accent);
+  background: var(--success-wash);
+  border-radius: 999px;
+  font-size: .86rem;
+  font-weight: 700;
+}
+
+@media (min-width: 600px) {
+  .card { padding: 2rem; }
+  .choice-grid.two-col { grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+}
+
+@media (max-width: 520px) {
+  .save-note span:last-child { display: none; }
+  .btn { padding-inline: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-rail">
+  <div class="progress-inner">
+    <div class="progress-label" aria-live="polite">
+      <span id="stepCount">Step 1 of 7</span>
+      <span class="section-name" id="stepName">Welcome</span>
+    </div>
+    <div class="save-note">
+      <span class="save-indicator" id="saveIndicator" aria-hidden="true"></span>
+      <span>Your progress is saved automatically</span>
+    </div>
+  </div>
+  <div class="progress-track" aria-hidden="true">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<main>
+<form id="questionnaire" novalidate>
+
+<section class="step" data-title="Welcome" aria-labelledby="welcomeHeading">
+  <p class="eyebrow">Kahakai blog interview</p>
+  <h1 id="welcomeHeading" tabindex="-1">Let's shape your next blog story.</h1>
+  <p class="lede">Share what you know in your own words. Short answers are fine, and you can return to the form whenever you like.</p>
+  <div class="card">
+    <div class="field">
+      <label for="name">Your name</label>
+      <input type="text" id="name" data-field="name" required autocomplete="name" value="Annie Foley">
+      <p class="error-msg" id="error-name">Please add your name to continue.</p>
+    </div>
+    <div class="field">
+      <label for="email">Email address</label>
+      <input type="email" id="email" data-field="email" required autocomplete="email" inputmode="email">
+      <p class="error-msg" id="error-email">Please check that email address.</p>
+    </div>
+    <div class="field">
+      <label for="topic">What would you like this article to be about?</label>
+      <textarea id="topic" data-field="topic" required placeholder="For example: what makes a good poke bowl, eating gluten-free in New Plymouth, or the story behind a favourite dish"></textarea>
+      <p class="error-msg" id="error-topic">Add a topic or rough idea to continue.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step" data-title="The topic" aria-labelledby="topicHeading">
+  <h2 id="topicHeading" tabindex="-1">What should this story achieve?</h2>
+  <p class="lede">This gives the article a clear purpose and keeps it useful for the reader.</p>
+  <div class="card">
+    <div class="field">
+      <label for="whyNow">Why is this topic relevant right now?</label>
+      <textarea id="whyNow" data-field="whyNow" required placeholder="Think about customer questions, a seasonal ingredient, a new dish, an event, or something people often misunderstand."></textarea>
+      <p class="error-msg" id="error-whyNow">Tell us why this is worth writing about now.</p>
+    </div>
+    <div class="field">
+      <label for="takeaway">What is the single most important thing readers should learn?</label>
+      <textarea id="takeaway" data-field="takeaway" required></textarea>
+      <p class="error-msg" id="error-takeaway">Add the main takeaway for the reader.</p>
+    </div>
+    <div class="field">
+      <label for="question">What customer question or misconception should the article answer? <span class="optional">(optional)</span></label>
+      <textarea id="question" data-field="question"></textarea>
+    </div>
+    <fieldset>
+      <legend>Is the topic connected to any of these? <span class="optional">(choose any)</span></legend>
+      <div class="choice-grid two-col">
+        <label class="check-row"><input type="checkbox" data-group="topicConnections" value="A particular dish"><span>A particular dish</span></label>
+        <label class="check-row"><input type="checkbox" data-group="topicConnections" value="An ingredient"><span>An ingredient</span></label>
+        <label class="check-row"><input type="checkbox" data-group="topicConnections" value="A season or event"><span>A season or event</span></label>
+        <label class="check-row"><input type="checkbox" data-group="topicConnections" value="A business announcement"><span>A business announcement</span></label>
+        <label class="check-row"><input type="checkbox" data-group="topicConnections" value="The Kahakai story"><span>The Kahakai story</span></label>
+        <label class="check-row"><input type="checkbox" data-group="topicConnections" value="A local Taranaki connection"><span>A local Taranaki connection</span></label>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section class="step" data-title="Your experience" aria-labelledby="experienceHeading">
+  <h2 id="experienceHeading" tabindex="-1">Tell it as only you can.</h2>
+  <p class="lede">Firsthand details make the article sound like Kahakai, rather than a generic food blog.</p>
+  <div class="card">
+    <div class="field">
+      <label for="personalExperience">What is your personal experience with this topic?</label>
+      <textarea class="tall" id="personalExperience" data-field="personalExperience" required></textarea>
+      <p class="error-msg" id="error-personalExperience">Share a little of your own experience to continue.</p>
+    </div>
+    <div class="field">
+      <label for="openingStory">Is there a story or moment that could open the article? <span class="optional">(optional)</span></label>
+      <textarea id="openingStory" data-field="openingStory" placeholder="A conversation at the food truck, a trip, a mistake, a discovery, or a memorable customer moment."></textarea>
+    </div>
+    <div class="field">
+      <label for="wishPeopleKnew">What do you wish more people understood about this subject?</label>
+      <textarea id="wishPeopleKnew" data-field="wishPeopleKnew" required></textarea>
+      <p class="error-msg" id="error-wishPeopleKnew">Add the point you most want people to understand.</p>
+    </div>
+    <div class="field">
+      <label for="counterAdvice">What would you say if someone asked you about it at the food truck? <span class="optional">(optional)</span></label>
+      <textarea id="counterAdvice" data-field="counterAdvice"></textarea>
+    </div>
+    <div class="field">
+      <label for="difference">Does Kahakai approach this differently from other takeaway businesses? <span class="optional">(optional)</span></label>
+      <textarea id="difference" data-field="difference"></textarea>
+    </div>
+    <div class="field">
+      <label for="influences">Are any Hawaiian, Japanese, Montreal, Māori, or Taranaki influences relevant? <span class="optional">(optional)</span></label>
+      <textarea id="influences" data-field="influences" placeholder="Please explain the connection and any wording or context we should use carefully."></textarea>
+    </div>
+  </div>
+</section>
+
+<section class="step" data-title="Useful details" aria-labelledby="detailsHeading">
+  <h2 id="detailsHeading" tabindex="-1">Give us the useful details.</h2>
+  <p class="lede">Specifics turn your experience into a practical article people will want to save or share.</p>
+  <div class="card">
+    <div class="field">
+      <label for="dishes">Which Kahakai dishes or ingredients should be mentioned? <span class="optional">(optional)</span></label>
+      <textarea id="dishes" data-field="dishes"></textarea>
+    </div>
+    <div class="field">
+      <label for="facts">What are the three most important facts to include?</label>
+      <textarea class="tall" id="facts" data-field="facts" required placeholder="1.&#10;2.&#10;3."></textarea>
+      <p class="error-msg" id="error-facts">Add the key facts you want included.</p>
+    </div>
+    <div class="field">
+      <label for="behindScenes">Are there preparation or behind-the-scenes details people might enjoy? <span class="optional">(optional)</span></label>
+      <textarea id="behindScenes" data-field="behindScenes"></textarea>
+    </div>
+    <div class="field">
+      <label for="tips">What tips, steps, recommendations, or mistakes should we cover? <span class="optional">(optional)</span></label>
+      <textarea id="tips" data-field="tips"></textarea>
+    </div>
+    <div class="field">
+      <label for="sources">Are there suppliers, sources, studies, recipes, or local organisations we should reference? <span class="optional">(optional)</span></label>
+      <textarea id="sources" data-field="sources" placeholder="Names or links are both helpful."></textarea>
+    </div>
+    <fieldset>
+      <legend>Will the article discuss any sensitive or checkable claims?</legend>
+      <div class="choice-grid two-col">
+        <label class="check-row"><input type="checkbox" data-group="claimTypes" value="Gluten-free or coeliac suitability"><span>Gluten-free or coeliac suitability</span></label>
+        <label class="check-row"><input type="checkbox" data-group="claimTypes" value="Allergens or cross-contamination"><span>Allergens or cross-contamination</span></label>
+        <label class="check-row"><input type="checkbox" data-group="claimTypes" value="Nutrition or health benefits"><span>Nutrition or health benefits</span></label>
+        <label class="check-row"><input type="checkbox" data-group="claimTypes" value="Ingredient origin or sourcing"><span>Ingredient origin or sourcing</span></label>
+        <label class="check-row"><input type="checkbox" data-group="claimTypes" value="None of these"><span>None of these</span></label>
+      </div>
+      <div class="conditional" id="claimsFollowUp">
+        <label for="claimWording">What wording is accurate, and what must we check before publishing?</label>
+        <textarea id="claimWording" data-field="claimWording" placeholder="Include any limits, qualifications, approved wording, or sources we should use."></textarea>
+        <p class="error-msg" id="error-claimWording">Add the accurate wording or note what needs checking.</p>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section class="step" data-title="The reader" aria-labelledby="readerHeading">
+  <h2 id="readerHeading" tabindex="-1">Who are we writing for?</h2>
+  <p class="lede">Picture one person reading the article. What do they need to know before they visit or order?</p>
+  <div class="card">
+    <fieldset>
+      <legend>Who is the primary reader?</legend>
+      <div class="choice-grid two-col">
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="New Plymouth locals"><span>New Plymouth locals</span></label>
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="Visitors to Taranaki"><span>Visitors to Taranaki</span></label>
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="Coeliac or gluten-free diners"><span>Coeliac or gluten-free diners</span></label>
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="Health-conscious customers"><span>Health-conscious customers</span></label>
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="Families"><span>Families</span></label>
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="People new to poke"><span>People new to poke</span></label>
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="Vegetarian or plant-based diners"><span>Vegetarian or plant-based diners</span></label>
+        <label class="check-row"><input type="radio" name="primaryReader" data-group="primaryReader" value="Other"><span>Someone else</span></label>
+      </div>
+      <p class="error-msg" id="error-primaryReader">Choose the main person this article is for.</p>
+    </fieldset>
+    <div class="field">
+      <label for="readerOther">Anything else about this reader? <span class="optional">(optional)</span></label>
+      <input type="text" id="readerOther" data-field="readerOther">
+    </div>
+    <div class="field">
+      <label for="googleQuestion">What might this person type into Google?</label>
+      <textarea id="googleQuestion" data-field="googleQuestion" required placeholder="For example: where can I eat gluten-free in New Plymouth?"></textarea>
+      <p class="error-msg" id="error-googleQuestion">Add one likely Google search.</p>
+    </div>
+    <div class="field">
+      <label for="readerKnowledge">What might they already know about the topic? <span class="optional">(optional)</span></label>
+      <textarea id="readerKnowledge" data-field="readerKnowledge"></textarea>
+    </div>
+    <div class="field">
+      <label for="barriers">What question or concern could stop them from visiting or ordering? <span class="optional">(optional)</span></label>
+      <textarea id="barriers" data-field="barriers"></textarea>
+    </div>
+    <div class="field">
+      <label for="locations">Should we focus on a particular place?</label>
+      <select id="locations" data-field="locations" required>
+        <option value="">Choose one</option>
+        <option>New Plymouth</option>
+        <option>New Plymouth and wider Taranaki</option>
+        <option>Visitors travelling through Taranaki</option>
+        <option>No particular location</option>
+      </select>
+      <p class="error-msg" id="error-locations">Choose the geographic focus.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step" data-title="Voice and promotion" aria-labelledby="voiceHeading">
+  <h2 id="voiceHeading" tabindex="-1">How should it sound and finish?</h2>
+  <p class="lede">These choices help us keep the article true to Kahakai and give readers a useful next step.</p>
+  <div class="card">
+    <fieldset>
+      <legend>How should the article feel? <span class="optional">(choose any)</span></legend>
+      <div class="choice-grid two-col">
+        <label class="check-row"><input type="checkbox" data-group="tone" value="Relaxed and friendly"><span>Relaxed and friendly</span></label>
+        <label class="check-row"><input type="checkbox" data-group="tone" value="Knowledgeable"><span>Knowledgeable</span></label>
+        <label class="check-row"><input type="checkbox" data-group="tone" value="Playful"><span>Playful</span></label>
+        <label class="check-row"><input type="checkbox" data-group="tone" value="Personal"><span>Personal</span></label>
+        <label class="check-row"><input type="checkbox" data-group="tone" value="Educational"><span>Educational</span></label>
+        <label class="check-row"><input type="checkbox" data-group="tone" value="Community-focused"><span>Community-focused</span></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Whose voice should we use?</legend>
+      <label class="check-row"><input type="radio" name="voice" data-group="voice" value="Annie's voice using I"><span><strong>Annie's voice</strong> using "I"</span></label>
+      <label class="check-row"><input type="radio" name="voice" data-group="voice" value="Kahakai's voice using we"><span><strong>Kahakai's voice</strong> using "we"</span></label>
+      <label class="check-row"><input type="radio" name="voice" data-group="voice" value="Choose what suits the article"><span>Choose whichever suits the article</span></label>
+      <p class="error-msg" id="error-voice">Choose how the article should be written.</p>
+    </fieldset>
+    <div class="field">
+      <label for="language">Are there phrases we should use, avoid, or handle carefully? <span class="optional">(optional)</span></label>
+      <textarea id="language" data-field="language" placeholder="Include brand wording, cultural references, competitors, private information, or anything you do not want published."></textarea>
+    </div>
+    <div class="field">
+      <label for="cta">What should readers do after reading?</label>
+      <select id="cta" data-field="cta" required>
+        <option value="">Choose the main action</option>
+        <option>View the menu</option>
+        <option>Order online</option>
+        <option>Call for pickup</option>
+        <option>Get directions</option>
+        <option>Try a featured dish</option>
+        <option>Follow Kahakai on social media</option>
+        <option>No strong call to action</option>
+      </select>
+      <p class="error-msg" id="error-cta">Choose the main next step for readers.</p>
+    </div>
+    <div class="field">
+      <label for="promotion">Is there a particular dish, offer, or event to promote? <span class="optional">(optional)</span></label>
+      <textarea id="promotion" data-field="promotion"></textarea>
+    </div>
+    <div class="field">
+      <label for="links">Should we link to any supplier, local business, publication, or other page? <span class="optional">(optional)</span></label>
+      <textarea id="links" data-field="links" placeholder="Paste one link per line if you have them."></textarea>
+    </div>
+    <div class="field">
+      <label for="assets">Upload any useful photos or reference files <span class="optional">(optional)</span></label>
+      <input type="file" id="assets" accept="image/*,.pdf" multiple>
+      <p class="file-note">Files cannot be restored after closing the page. Your written answers will still be saved.</p>
+    </div>
+    <div class="field">
+      <label for="photoIdeas">What could we photograph for this article? <span class="optional">(optional)</span></label>
+      <textarea id="photoIdeas" data-field="photoIdeas" placeholder="A bowl, ingredient, supplier, preparation process, or behind-the-scenes moment."></textarea>
+    </div>
+    <div class="field">
+      <label for="deadline">Is there a preferred publication date? <span class="optional">(optional)</span></label>
+      <input type="date" id="deadline" data-field="deadline">
+    </div>
+    <div class="field">
+      <label for="approval">Who gives final approval before the article goes live?</label>
+      <input type="text" id="approval" data-field="approval" required value="Annie Foley">
+      <p class="error-msg" id="error-approval">Add the name of the final approver.</p>
+    </div>
+    <fieldset>
+      <legend>Can parts of the article be reused on social media?</legend>
+      <label class="check-row"><input type="radio" name="socialReuse" data-group="socialReuse" value="Yes"><span>Yes</span></label>
+      <label class="check-row"><input type="radio" name="socialReuse" data-group="socialReuse" value="Yes, but show me first"><span>Yes, but show me first</span></label>
+      <label class="check-row"><input type="radio" name="socialReuse" data-group="socialReuse" value="No"><span>No</span></label>
+    </fieldset>
+  </div>
+</section>
+
+<section class="step" data-title="Review and submit" aria-labelledby="reviewHeading">
+  <h2 id="reviewHeading" tabindex="-1">Review your answers.</h2>
+  <p class="lede">You can edit any section before sending. Blank optional answers are left out of the summary.</p>
+  <div class="card" id="reviewCard"></div>
+  <div class="nav">
+    <button type="button" class="btn btn-secondary" id="downloadButton">Download answers</button>
+    <button type="button" class="btn btn-primary" id="submitButton">Send answers</button>
+  </div>
+  <p class="submit-status" id="submitStatus" role="status" aria-live="polite"></p>
+</section>
+
+<section class="step" data-title="Complete" aria-labelledby="completeHeading">
+  <div class="confirm">
+    <div class="confirm-mark">Received</div>
+    <h2 id="completeHeading" tabindex="-1">Thank you, Annie.</h2>
+    <p class="lede" style="margin-inline:auto">Your answers will give us the ingredients for a useful, genuinely Kahakai article.</p>
+    <button type="button" class="btn btn-secondary" id="confirmDownloadButton">Download a copy</button>
+  </div>
+</section>
+
+<div class="nav" id="stepNavigation">
+  <button type="button" class="btn btn-back" id="backButton">Back</button>
+  <button type="button" class="btn btn-primary" id="nextButton">Next</button>
+</div>
+<p class="nav-hint" id="navigationHint" aria-live="polite"></p>
+
+</form>
+</main>
+
+<script>
+const FORM_ENDPOINT = "https://forminit.com/f/dbi3gtnu7jn";
+const NOTIFY_EMAIL = "hello@yourstudio.nz";
+const STORAGE_KEY = "kahakai-blog-interview-v2";
+
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+const form = $("#questionnaire");
+const steps = $$(".step");
+const reviewIndex = steps.length - 2;
+const completeIndex = steps.length - 1;
+const navigation = $("#stepNavigation");
+const nextButton = $("#nextButton");
+const backButton = $("#backButton");
+const navigationHint = $("#navigationHint");
+let currentStep = 0;
+let saveTimer;
+let indicatorTimer;
+
+function groupValues(groupName) {
+  return $$(`[data-group="${groupName}"]:checked`).map(input => input.value);
+}
+
+function singleGroupValue(groupName) {
+  return groupValues(groupName)[0] || "";
+}
+
+function collectData() {
+  const data = {
+    _meta: {
+      form: "kahakai-blog-interview",
+      version: 1,
+      savedAt: new Date().toISOString()
+    }
+  };
+
+  $$('[data-field]').forEach(element => {
+    data[element.dataset.field] = element.value.trim();
+  });
+
+  data.topicConnections = groupValues("topicConnections");
+  data.claimTypes = groupValues("claimTypes");
+  data.primaryReader = singleGroupValue("primaryReader");
+  data.tone = groupValues("tone");
+  data.voice = singleGroupValue("voice");
+  data.socialReuse = singleGroupValue("socialReuse");
+  data.assetFileNames = Array.from($("#assets").files).map(file => file.name);
+  return data;
+}
+
+function restoreDraft() {
+  let data;
+  try {
+    data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  } catch (error) {
+    data = null;
+  }
+  if (!data) return;
+
+  $$('[data-field]').forEach(element => {
+    if (typeof data[element.dataset.field] === "string") {
+      element.value = data[element.dataset.field];
+    }
+  });
+
+  ["topicConnections", "claimTypes", "tone"].forEach(groupName => {
+    (data[groupName] || []).forEach(value => {
+      const input = $$(`[data-group="${groupName}"]`).find(item => item.value === value);
+      if (input) input.checked = true;
+    });
+  });
+
+  ["primaryReader", "voice", "socialReuse"].forEach(groupName => {
+    const input = $$(`[data-group="${groupName}"]`).find(item => item.value === data[groupName]);
+    if (input) input.checked = true;
+  });
+}
+
+function saveDraft() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
+      const indicator = $("#saveIndicator");
+      indicator.classList.add("active");
+      clearTimeout(indicatorTimer);
+      indicatorTimer = setTimeout(() => indicator.classList.remove("active"), 800);
+    } catch (error) {
+      // The form remains usable when browser storage is unavailable.
+    }
+  }, 300);
+}
+
+function requirement(id, errorId, message, test) {
+  const field = $("#" + id);
+  const valid = test ? test(field.value) : field.value.trim().length > 0;
+  return valid ? null : { field, errorId, message };
+}
+
+const validators = [
+  () => [
+    requirement("name", "error-name", "Add your name to continue."),
+    requirement("email", "error-email", "Add a valid email address to continue.", value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)),
+    requirement("topic", "error-topic", "Add a topic or rough idea to continue.")
+  ].filter(Boolean),
+  () => [
+    requirement("whyNow", "error-whyNow", "Tell us why this topic matters now."),
+    requirement("takeaway", "error-takeaway", "Add the main reader takeaway.")
+  ].filter(Boolean),
+  () => [
+    requirement("personalExperience", "error-personalExperience", "Share a little of your own experience."),
+    requirement("wishPeopleKnew", "error-wishPeopleKnew", "Add what you most want people to understand.")
+  ].filter(Boolean),
+  () => {
+    const errors = [
+      requirement("facts", "error-facts", "Add the key facts you want included.")
+    ].filter(Boolean);
+    const claims = groupValues("claimTypes");
+    if (claims.some(value => value !== "None of these") && !$("#claimWording").value.trim()) {
+      errors.push({
+        field: $("#claimWording"),
+        errorId: "error-claimWording",
+        message: "Add the accurate claim wording or note what needs checking."
+      });
+    }
+    return errors;
+  },
+  () => {
+    const errors = [
+      requirement("googleQuestion", "error-googleQuestion", "Add one likely Google search."),
+      requirement("locations", "error-locations", "Choose the geographic focus.")
+    ].filter(Boolean);
+    if (!singleGroupValue("primaryReader")) {
+      errors.unshift({ field: null, errorId: "error-primaryReader", message: "Choose the main reader." });
+    }
+    return errors;
+  },
+  () => {
+    const errors = [
+      requirement("cta", "error-cta", "Choose the main next step for readers."),
+      requirement("approval", "error-approval", "Add the final approver.")
+    ].filter(Boolean);
+    if (!singleGroupValue("voice")) {
+      errors.unshift({ field: null, errorId: "error-voice", message: "Choose the article voice." });
+    }
+    return errors;
+  },
+  () => []
+];
+
+function refreshValidation(showErrors = false) {
+  if (currentStep >= reviewIndex) {
+    nextButton.disabled = false;
+    navigationHint.textContent = "";
+    return true;
+  }
+
+  const step = steps[currentStep];
+  $$('[aria-invalid="true"]', step).forEach(field => field.removeAttribute("aria-invalid"));
+  $$(".error-msg.show", step).forEach(error => error.classList.remove("show"));
+  const errors = validators[currentStep]();
+
+  errors.forEach(error => {
+    const shouldShow = showErrors || (error.field && error.field.dataset.touched);
+    if (!shouldShow) return;
+    if (error.field) error.field.setAttribute("aria-invalid", "true");
+    const errorElement = $("#" + error.errorId);
+    if (errorElement) errorElement.classList.add("show");
+  });
+
+  nextButton.disabled = errors.length > 0;
+  navigationHint.textContent = errors.length ? errors[0].message : "";
+  return errors.length === 0;
+}
+
+function updateConditionalClaims() {
+  const claims = groupValues("claimTypes");
+  const needsFollowUp = claims.some(value => value !== "None of these");
+  $("#claimsFollowUp").classList.toggle("visible", needsFollowUp);
+}
+
+function showStep(index, focusHeading = true) {
+  currentStep = index;
+  steps.forEach((step, stepIndex) => step.classList.toggle("active", stepIndex === index));
+  const isReview = index === reviewIndex;
+  const isComplete = index === completeIndex;
+  navigation.style.display = (isReview || isComplete) ? "none" : "";
+  backButton.style.visibility = index === 0 ? "hidden" : "visible";
+  nextButton.textContent = index === reviewIndex - 1 ? "Review answers" : "Next";
+
+  const total = reviewIndex + 1;
+  const shown = Math.min(index + 1, total);
+  $("#stepCount").textContent = isComplete ? "Complete" : `Step ${shown} of ${total}`;
+  $("#stepName").textContent = steps[index].dataset.title;
+  $("#progressFill").style.width = isComplete ? "100%" : `${((shown - 1) / (total - 1)) * 100}%`;
+
+  if (isReview) buildReview();
+  refreshValidation();
+  window.scrollTo({ top: 0, behavior: "instant" });
+
+  if (focusHeading) {
+    const heading = $("h1, h2", steps[index]);
+    if (heading) heading.focus({ preventScroll: true });
+  }
+}
+
+function displayValue(value) {
+  if (Array.isArray(value)) return value.length ? value.join(", ") : "";
+  return value || "";
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function buildReviewSections(data) {
+  return [
+    ["Topic", 0, {
+      "Name": data.name,
+      "Email": data.email,
+      "Article topic": data.topic
+    }],
+    ["Purpose", 1, {
+      "Why now": data.whyNow,
+      "Main takeaway": data.takeaway,
+      "Question or misconception": data.question,
+      "Connections": data.topicConnections
+    }],
+    ["Experience", 2, {
+      "Personal experience": data.personalExperience,
+      "Opening story": data.openingStory,
+      "What people should understand": data.wishPeopleKnew,
+      "Advice at the food truck": data.counterAdvice,
+      "What Kahakai does differently": data.difference,
+      "Relevant influences": data.influences
+    }],
+    ["Useful details", 3, {
+      "Dishes or ingredients": data.dishes,
+      "Key facts": data.facts,
+      "Behind the scenes": data.behindScenes,
+      "Tips and mistakes": data.tips,
+      "Sources and suppliers": data.sources,
+      "Claims": data.claimTypes,
+      "Approved claim wording": data.claimWording
+    }],
+    ["Reader", 4, {
+      "Primary reader": data.primaryReader,
+      "Reader notes": data.readerOther,
+      "Likely Google search": data.googleQuestion,
+      "What they know": data.readerKnowledge,
+      "Possible barriers": data.barriers,
+      "Location focus": data.locations
+    }],
+    ["Voice and promotion", 5, {
+      "Tone": data.tone,
+      "Voice": data.voice,
+      "Language guidance": data.language,
+      "Reader action": data.cta,
+      "Promotion": data.promotion,
+      "Links": data.links,
+      "Uploaded files": data.assetFileNames,
+      "Photo ideas": data.photoIdeas,
+      "Preferred date": data.deadline,
+      "Final approval": data.approval,
+      "Social reuse": data.socialReuse
+    }]
+  ];
+}
+
+function buildReview() {
+  const sections = buildReviewSections(collectData());
+  $("#reviewCard").innerHTML = sections.map(([title, stepIndex, rows]) => {
+    const entries = Object.entries(rows).filter(([, value]) => displayValue(value));
+    return `<div class="review-section">
+      <h3>${escapeHtml(title)} <button type="button" class="review-edit" data-goto="${stepIndex}">Edit</button></h3>
+      <dl>${entries.map(([label, value]) => `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(displayValue(value))}</dd>`).join("")}</dl>
+    </div>`;
+  }).join("");
+
+  $$(".review-edit").forEach(button => {
+    button.addEventListener("click", () => showStep(Number(button.dataset.goto)));
+  });
+}
+
+function readableSummary(data) {
+  let output = `KAHAKAI BLOG INTERVIEW\nSubmitted ${new Date().toLocaleString()}\n\n`;
+  buildReviewSections(data).forEach(([title, , rows]) => {
+    output += `${title.toUpperCase()}\n`;
+    Object.entries(rows).forEach(([label, value]) => {
+      const shown = displayValue(value);
+      if (shown) output += `${label}: ${shown}\n`;
+    });
+    output += "\n";
+  });
+  return output;
+}
+
+function downloadFile(fileName, contents, type = "text/plain") {
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(new Blob([contents], { type }));
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+function downloadAnswers() {
+  const data = collectData();
+  downloadFile("kahakai-blog-interview.json", JSON.stringify(data, null, 2), "application/json");
+  downloadFile("kahakai-blog-interview-summary.txt", readableSummary(data));
+}
+
+async function submitAnswers() {
+  const button = $("#submitButton");
+  const status = $("#submitStatus");
+  const data = collectData();
+
+  if (!FORM_ENDPOINT) {
+    downloadAnswers();
+    status.classList.remove("error");
+    status.textContent = `Your answers were downloaded. Please email them to ${NOTIFY_EMAIL}.`;
+    finish();
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Sending...";
+  status.classList.remove("error");
+  status.textContent = "";
+
+  try {
+    const payload = new FormData();
+    payload.append("fi-sender-fullName", data.name || "");
+    payload.append("fi-sender-email", data.email || "");
+    payload.append("fi-sender-company", "Kahakai Poké Bowl");
+    payload.append("fi-text-summary", readableSummary(data));
+    payload.append("fi-text-fullData", JSON.stringify(data, null, 2));
+    Array.from($("#assets").files).forEach(file => payload.append("fi-file-assets", file, file.name));
+
+    const response = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      body: payload,
+      headers: { "Accept": "application/json" }
+    });
+    if (!response.ok) throw new Error("Submission failed");
+    finish();
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = "Send answers";
+    status.classList.add("error");
+    status.textContent = "That did not send. Check your connection and try again, or download your answers so nothing is lost.";
+  }
+}
+
+function finish() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (error) {
+    // No action is needed when browser storage is unavailable.
+  }
+  showStep(completeIndex);
+}
+
+form.addEventListener("input", () => {
+  updateConditionalClaims();
+  refreshValidation();
+  saveDraft();
+});
+
+form.addEventListener("change", event => {
+  const changedClaim = event.target.matches('[data-group="claimTypes"]') ? event.target : null;
+  if (changedClaim && changedClaim.checked) {
+    if (changedClaim.value === "None of these") {
+      $$('[data-group="claimTypes"]').forEach(input => {
+        if (input !== changedClaim) input.checked = false;
+      });
+    } else {
+      const noneOption = $$('[data-group="claimTypes"]').find(input => input.value === "None of these");
+      if (noneOption) noneOption.checked = false;
+    }
+  }
+  updateConditionalClaims();
+  refreshValidation();
+  saveDraft();
+});
+
+form.addEventListener("focusout", event => {
+  if (event.target.matches("input, select, textarea")) {
+    event.target.dataset.touched = "1";
+    refreshValidation();
+  }
+});
+
+form.addEventListener("keydown", event => {
+  if (event.key === "Enter" && !event.target.matches("textarea, button") && currentStep < reviewIndex) {
+    event.preventDefault();
+    if (refreshValidation(true)) showStep(currentStep + 1);
+  }
+});
+
+nextButton.addEventListener("click", () => {
+  if (refreshValidation(true)) showStep(currentStep + 1);
+});
+
+backButton.addEventListener("click", () => showStep(Math.max(0, currentStep - 1)));
+$("#downloadButton").addEventListener("click", downloadAnswers);
+$("#confirmDownloadButton").addEventListener("click", downloadAnswers);
+$("#submitButton").addEventListener("click", submitAnswers);
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden" && currentStep !== completeIndex) {
+    clearTimeout(saveTimer);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
+    } catch (error) {
+      // No action is needed when browser storage is unavailable.
+    }
+  }
+});
+
+restoreDraft();
+updateConditionalClaims();
+showStep(0, false);
+</script>
+</body>
+</html>

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+const GOOGLE_TAG_MANAGER_ID = "GTM-N8PFSPGM";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -16,22 +19,73 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://lookin.nz"),
-  title: "Web Design New Plymouth | Lookin",
+  title: {
+    default: "Web Design New Plymouth | Lookin",
+    template: "%s | Lookin",
+  },
   description:
     "Approachable website design, original content and practical digital growth support for New Plymouth, Taranaki and businesses across New Zealand.",
+  applicationName: "Lookin",
+  authors: [{ name: "Tamron Gardner", url: "https://lookin.nz" }],
+  creator: "Tamron Gardner",
+  publisher: "Lookin",
+  category: "Web design and digital marketing",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: "A better website, without the usual hassle | Lookin",
     description:
       "Strategy, design, development and original content—handled by one experienced local partner.",
     type: "website",
     locale: "en_NZ",
+    siteName: "Lookin",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "A better website, without the usual hassle | Lookin",
+    description:
+      "Strategy, design, development and original content—handled by one experienced local partner.",
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-NZ" className={`${plusJakarta.variable} ${jetBrainsMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
+            height="0"
+            width="0"
+            title="Google Tag Manager"
+            aria-hidden="true"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {children}
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}');`}
+        </Script>
+      </body>
     </html>
   );
 }
