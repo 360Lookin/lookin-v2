@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,13 +19,12 @@ import {
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const BOOKING_EMAIL =
-  "mailto:hello@lookin.nz?subject=Free%2030-minute%20Website%20Discovery%20Session";
+const BOOKING_URL = "https://calendar.app.google/R1LZCQ1HcVA2joeG7";
 
 const scopeItems = [
   "Up to five core pages",
-  "One 90-minute local photo session",
-  "Up to 20 edited photographs",
+  "One 90-minute local photo and video session",
+  "Up to 20 edited photographs and one video up to 15 seconds long",
   "Copy shaping from your supplied information",
   "Foundational on-page SEO and analytics",
   "One enquiry form or simple booking link",
@@ -121,7 +121,8 @@ export default function LookinHome() {
           <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
           <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a className="nav-cta" href={BOOKING_EMAIL}>Book a free session <ArrowRight weight="bold" /></a>
+          <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+          <a className="nav-cta" href={BOOKING_URL}>Book a free session <ArrowRight weight="bold" /></a>
         </nav>
         <button
           className="menu-button"
@@ -143,7 +144,7 @@ export default function LookinHome() {
               I bring strategy, words, design, development and original photography together—so you get one clear process and a website built to help your business grow.
             </p>
             <div className="hero-actions" data-hero-reveal>
-              <a className="button button-primary" href={BOOKING_EMAIL}>
+              <a className="button button-primary" href={BOOKING_URL}>
                 Book a free 30-minute session <ArrowRight weight="bold" />
               </a>
               <a className="text-link" href="#work">See how I work <ArrowDownRight /></a>
@@ -156,13 +157,13 @@ export default function LookinHome() {
           <div className="hero-visual" data-hero-reveal>
             <div className="hero-photo image-hover">
               <Image
-                src="https://picsum.photos/seed/taranaki-hospitality/1400/1700"
-                alt="Placeholder for an approved Lookin local hospitality project photograph"
+                src="/assets/illustrations/responsive-web-design-hero-illustration.webp"
+                alt="Concept illustration of a responsive business website across desktop, tablet and mobile, with photography, wireframing and analytics tools"
                 fill
                 priority
                 sizes="(max-width: 899px) 100vw, 40vw"
               />
-              <span className="asset-note">Approved local project image to be supplied</span>
+              <span className="asset-note">Temporary concept illustration</span>
             </div>
             <div className="hero-card">
               <span>Starter websites</span>
@@ -177,7 +178,7 @@ export default function LookinHome() {
             {[0, 1].map((copy) => (
               <div className="marquee-set" aria-hidden={copy === 1} key={copy}>
                 <span>Strategy</span><i>●</i><span>Web design</span><i>●</i><span>Development</span><i>●</i>
-                <span>Photography</span><i>●</i><span>Google Ads</span><i>●</i><span>Reporting</span><i>●</i>
+                <span>Photography</span><i>●</i><span>Videography</span><i>●</i><span>Google Ads</span><i>●</i><span>Reporting</span><i>●</i>
               </div>
             ))}
           </div>
@@ -196,7 +197,7 @@ export default function LookinHome() {
         <section className="services-section" id="services">
           <div className="section-heading content-width" data-reveal>
             <p className="eyebrow">One connected offer</p>
-            <h2>Build it properly. Grow it deliberately. Get support when you want it.</h2>
+            <h2>Build it properly. Make it work harder. Get support when you want it.</h2>
           </div>
 
           <div className="service-grid content-width">
@@ -253,33 +254,43 @@ export default function LookinHome() {
             <div className="work-intro">
               <p className="eyebrow">Connected digital work</p>
               <h2>A good website is stronger when the content, promotion and reporting work together.</h2>
-              <p>These are the first stories being prepared for the new Lookin portfolio. Published results and testimonials will only be added once approved.</p>
+              <p>Explore how strategy, design, development, photography and promotion come together to create clearer customer journeys and more useful websites.</p>
             </div>
             <div className="work-list">
-              <article className="work-card" data-reveal>
+              <Link
+                href="/work/the-white-swan"
+                className="work-card work-card-link"
+                aria-label="View The White Swan case study"
+                data-reveal
+              >
                 <div className="work-image image-hover">
                   <Image src="/assets/illustrations/white-swan-connected-digital-illustration.webp" alt="Concept illustration of connected hospitality website, advertising and reporting work for The White Swan case study" fill sizes="(max-width: 899px) 100vw, 50vw" />
-                  <span className="asset-note">Concept illustration · approved project image pending</span>
                 </div>
                 <div className="work-copy">
                   <p>Hospitality · Website · Advertising · Reporting</p>
                   <h3>The White Swan / Experience Collective</h3>
                   <span>Website and digital work supported by Google Ads, a comprehensive reporting dashboard, photography and immersive content.</span>
                   <small>Qualitative case study—verified metrics pending.</small>
+                  <strong className="work-card-action">View case study <ArrowRight weight="bold" /></strong>
                 </div>
-              </article>
-              <article className="work-card" data-reveal>
+              </Link>
+              <Link
+                href="/work/kahakai-poke-bowls"
+                className="work-card work-card-link"
+                aria-label="View Kahakai Poké Bowls case study"
+                data-reveal
+              >
                 <div className="work-image image-hover">
                   <Image src="/assets/illustrations/kahakai-mobile-site-illustration.webp" alt="Concept illustration of a mobile food-truck website and customer journey for the Kahakai Poké Bowls case study" fill sizes="(max-width: 899px) 100vw, 50vw" />
-                  <span className="asset-note">Concept illustration · approved project image pending</span>
                 </div>
                 <div className="work-copy">
                   <p>Food · Website design and development</p>
                   <h3>Kahakai Poké Bowls</h3>
                   <span>A fresh digital home for a New Plymouth food truck at Liardet Street Projects.</span>
-                  <small>Full case study and approved testimonial coming soon.</small>
+                  <small>Mobile-first case study · verified metrics pending.</small>
+                  <strong className="work-card-action">View case study <ArrowRight weight="bold" /></strong>
                 </div>
-              </article>
+              </Link>
             </div>
           </div>
         </section>
@@ -296,7 +307,7 @@ export default function LookinHome() {
                 <p>Starter website</p>
                 <h3>From $2,900 <small>+ GST</small></h3>
                 <span>Best for a small local business that needs a focused, credible website and original imagery without a drawn-out agency process.</span>
-                <a className="button button-dark" href={BOOKING_EMAIL}>Talk through your project <ArrowRight /></a>
+                <a className="button button-dark" href={BOOKING_URL}>Talk through your project <ArrowRight /></a>
               </div>
               <ul>{scopeItems.map((item) => <li key={item}><Check weight="bold" />{item}</li>)}</ul>
             </article>
@@ -325,9 +336,12 @@ export default function LookinHome() {
 
         <section className="about-section content-width" id="about">
           <div className="about-portrait image-hover" data-reveal>
-            <div className="portrait-placeholder">
-              <span>TG</span><small>Professional portrait to be supplied</small>
-            </div>
+            <Image
+              src="/assets/portraits/tamron-gardner-working-at-desk.webp"
+              alt="Tamron Gardner working at his desk with website development and photography equipment"
+              fill
+              sizes="(max-width: 899px) 100vw, 55vw"
+            />
           </div>
           <div className="about-copy" data-reveal>
             <p className="eyebrow">Direct, experienced and local</p>
@@ -354,13 +368,23 @@ export default function LookinHome() {
           </div>
         </section>
 
+        <section className="contact-choice content-width" aria-labelledby="contact-choice-heading" data-reveal>
+          <div>
+            <h2 id="contact-choice-heading">Prefer to write it down first?</h2>
+            <p>Tell me what you are working on, what is getting in the way and where you would like the business to go.</p>
+          </div>
+          <div className="contact-choice-actions">
+            <Link className="button button-dark" href="/contact">Send a project enquiry <ArrowRight weight="bold" /></Link>
+            <a className="text-link" href={BOOKING_URL}>Book a 30-minute session <ArrowRight /></a>
+          </div>
+        </section>
+
         <section className="final-cta" id="contact">
           <div className="final-cta-inner content-width" data-reveal>
             <p className="eyebrow">Bring the website. Bring the questions.</p>
             <h2>Let’s make the next step clear.</h2>
             <p>In 30 minutes, we can look at where your current website is falling short, what a sensible first version needs, and whether I am the right person to help.</p>
-            <a className="button button-primary button-large" href={BOOKING_EMAIL}>Book a free Website Discovery Session <ArrowRight weight="bold" /></a>
-            <small>Calendar link is being configured. For now, this opens an email to arrange a time.</small>
+            <a className="button button-primary button-large" href={BOOKING_URL}>Book a free Website Discovery Session <ArrowRight weight="bold" /></a>
           </div>
         </section>
       </div>
