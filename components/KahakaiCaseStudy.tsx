@@ -153,8 +153,16 @@ export default function KahakaiCaseStudy() {
             </div>
           </div>
           <figure className={styles.heroVisual} data-kahakai-hero>
-            <div><Image src="/assets/illustrations/kahakai-mobile-site-illustration.webp" alt="Concept illustration of a responsive mobile food-truck website and ordering journey" fill priority sizes="(max-width: 900px) 100vw, 46vw" /></div>
-            <figcaption>Concept illustration · approved project photography shown below</figcaption>
+            <div>
+              <Image
+                src="/assets/case-studies/kahakai/kahakai-menu-hero.webp"
+                alt="Responsive build-your-own poké bowl menu displayed on the Kahakai Poké Bowls website"
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 46vw"
+              />
+            </div>
+            <figcaption>Responsive build-your-own poké bowl menu · desktop layout</figcaption>
           </figure>
         </section>
 

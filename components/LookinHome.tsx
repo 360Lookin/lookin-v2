@@ -24,7 +24,7 @@ const BOOKING_URL = "https://calendar.app.google/R1LZCQ1HcVA2joeG7";
 const scopeItems = [
   "Up to five core pages",
   "One 90-minute local photo and video session",
-  "Up to 20 edited photographs and one video up to 15 seconds long",
+  "Up to 20 edited photographs and a video up to 30 seconds long",
   "Copy shaping from your supplied information",
   "Foundational on-page SEO and analytics",
   "One enquiry form or simple booking link",
@@ -157,13 +157,12 @@ export default function LookinHome() {
           <div className="hero-visual" data-hero-reveal>
             <div className="hero-photo image-hover">
               <Image
-                src="/assets/illustrations/responsive-web-design-hero-illustration.webp"
-                alt="Concept illustration of a responsive business website across desktop, tablet and mobile, with photography, wireframing and analytics tools"
+                src="/assets/portraits/tamron-galbraith-working-at-desk.webp"
+                alt="Tamron Galbraith working at his desk with website development and photography equipment"
                 fill
                 priority
                 sizes="(max-width: 899px) 100vw, 40vw"
               />
-              <span className="asset-note">Temporary concept illustration</span>
             </div>
             <div className="hero-card">
               <span>Starter websites</span>
@@ -263,14 +262,27 @@ export default function LookinHome() {
                 aria-label="View The White Swan case study"
                 data-reveal
               >
-                <div className="work-image image-hover">
-                  <Image src="/assets/illustrations/white-swan-connected-digital-illustration.webp" alt="Concept illustration of connected hospitality website, advertising and reporting work for The White Swan case study" fill sizes="(max-width: 899px) 100vw, 50vw" />
+                <div className="work-image work-image-responsive image-hover">
+                  <Image
+                    src="/assets/case-studies/white-swan/white-swan-rooms-accordion-desktop.webp"
+                    alt="Desktop and mobile views of the responsive Homestead Suite accordion designed for The White Swan website"
+                    fill
+                    sizes="(max-width: 899px) 100vw, 50vw"
+                  />
+                  <div className="work-card-mobile-shot" aria-hidden="true">
+                    <Image
+                      src="/assets/case-studies/white-swan/white-swan-rooms-accordion-mobile.webp"
+                      alt=""
+                      fill
+                      sizes="(max-width: 560px) 24vw, 12vw"
+                    />
+                  </div>
                 </div>
                 <div className="work-copy">
                   <p>Hospitality · Website · Advertising · Reporting</p>
                   <h3>The White Swan / Experience Collective</h3>
                   <span>Website and digital work supported by Google Ads, a comprehensive reporting dashboard, photography and immersive content.</span>
-                  <small>Qualitative case study—verified metrics pending.</small>
+                  <small>Apr–Jul 2026: website sessions up 74%, website accommodation bookings up 26% and website revenue up 16% versus the comparison period.</small>
                   <strong className="work-card-action">View case study <ArrowRight weight="bold" /></strong>
                 </div>
               </Link>
@@ -280,14 +292,26 @@ export default function LookinHome() {
                 aria-label="View Kahakai Poké Bowls case study"
                 data-reveal
               >
-                <div className="work-image image-hover">
-                  <Image src="/assets/illustrations/kahakai-mobile-site-illustration.webp" alt="Concept illustration of a mobile food-truck website and customer journey for the Kahakai Poké Bowls case study" fill sizes="(max-width: 899px) 100vw, 50vw" />
+                <div className="work-image work-image-responsive work-image-menu image-hover">
+                  <Image
+                    src="/assets/case-studies/kahakai/kahakai-menu-desktop.webp"
+                    alt="Desktop and mobile views of the responsive build-your-own poké bowl menu designed for Kahakai Poké Bowls"
+                    fill
+                    sizes="(max-width: 899px) 100vw, 50vw"
+                  />
+                  <div className="work-card-mobile-shot" aria-hidden="true">
+                    <Image
+                      src="/assets/case-studies/kahakai/kahakai-menu-mobile.webp"
+                      alt=""
+                      fill
+                      sizes="(max-width: 560px) 24vw, 12vw"
+                    />
+                  </div>
                 </div>
                 <div className="work-copy">
                   <p>Food · Website design and development</p>
                   <h3>Kahakai Poké Bowls</h3>
                   <span>A fresh digital home for a New Plymouth food truck at Liardet Street Projects.</span>
-                  <small>Mobile-first case study · verified metrics pending.</small>
                   <strong className="work-card-action">View case study <ArrowRight weight="bold" /></strong>
                 </div>
               </Link>
@@ -337,10 +361,10 @@ export default function LookinHome() {
         <section className="about-section content-width" id="about">
           <div className="about-portrait image-hover" data-reveal>
             <Image
-              src="/assets/portraits/tamron-gardner-working-at-desk.webp"
-              alt="Tamron Gardner working at his desk with website development and photography equipment"
+              src="/assets/portraits/tamron-galbraith-photographer-portrait.webp"
+              alt="Tamron Galbraith holding a camera and tripod outside a local business"
               fill
-              sizes="(max-width: 899px) 100vw, 55vw"
+              sizes="(max-width: 899px) 100vw, 42vw"
             />
           </div>
           <div className="about-copy" data-reveal>

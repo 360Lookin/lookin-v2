@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
@@ -12,12 +12,14 @@ import {
   ArrowUpRight,
   Browser,
   Camera,
+  CaretLeft,
+  CaretRight,
   ChartLineUp,
   DeviceMobile,
-  Minus,
+  MagnifyingGlassPlus,
   Monitor,
-  Plus,
   SquaresFour,
+  X,
 } from "@phosphor-icons/react";
 import styles from "./WhiteSwanCaseStudy.module.css";
 
@@ -29,59 +31,75 @@ type DemoMode = "rooms" | "functions";
 
 type AccordionItem = {
   title: string;
-  image: string;
+  images: string[];
   alt: string;
-  description: string;
-  detail: string;
+  paragraphs: string[];
   cta: string;
   href: string;
 };
+
+const WHITE_SWAN_BOOKING_URL =
+  "https://bookdirect.prenohq.com/inst/#home?propertyId=422IjFc1GMKHbkDkKA4qjq30URUwOTQ1MiI=&JDRN=Y";
 
 const demoContent: Record<DemoMode, AccordionItem[]> = {
   rooms: [
     {
       title: "Homestead Suite",
-      image: "/assets/case-studies/white-swan/homestead-suite.webp",
+      images: [
+        "/assets/case-studies/white-swan/homestead-suite-01.webp",
+        "/assets/case-studies/white-swan/homestead-suite-02.webp",
+        "/assets/case-studies/white-swan/homestead-suite-03.webp",
+        "/assets/case-studies/white-swan/homestead-suite-04.webp",
+        "/assets/case-studies/white-swan/homestead-suite-05.webp",
+      ],
       alt: "Homestead Suite interior at The White Swan Country Hotel",
-      description:
-        "A character-rich suite that balances the atmosphere of a Wairarapa homestead with modern comfort.",
-      detail:
-        "The content, gallery and booking action stay connected in one focused panel, helping guests make a confident choice without leaving the page.",
-      cta: "View rooms page",
-      href: "https://thewhiteswanhotel.co.nz/rooms-suites",
+      paragraphs: [
+        "Ensconce yourself in what an original Wairarapa homestead suite may have felt like, layering in modern elements of comfort and style. This elegant room pays homage to the timeless beauty and grace of a homestead, with earthy warm neutrals and textures. A representation of life on the farm, new beginnings and greener pastures.",
+        "Located upstairs within the hotel with a balcony overlooking Greytown. Amenities include free wi-fi, smart TV, tea and coffee, fridge, bath and shower, free onsite parking, plus the usual necessities such as a hair dryer, iron and ironing board. Each room includes hand wash, body wash, shampoo and conditioner.",
+        "The Homestead Suite can also have an additional rollaway bed added for an additional charge.",
+      ],
+      cta: "Book your stay",
+      href: WHITE_SWAN_BOOKING_URL,
     },
     {
       title: "Governors Suite",
-      image: "/assets/case-studies/white-swan/governors-suite.webp",
+      images: [
+        "/assets/case-studies/white-swan/governors-suite-01.webp",
+        "/assets/case-studies/white-swan/governors-suite-02.webp",
+        "/assets/case-studies/white-swan/governors-suite-03.webp",
+        "/assets/case-studies/white-swan/governors-suite-04.webp",
+        "/assets/case-studies/white-swan/governors-suite-05.webp",
+      ],
       alt: "Governors Suite living area at The White Swan Country Hotel",
-      description:
-        "A spacious suite presented with the photography and practical information guests need to compare their options.",
-      detail:
-        "On smaller screens the image, description and booking action form a comfortable vertical reading sequence with no horizontal overflow.",
-      cta: "View rooms page",
-      href: "https://thewhiteswanhotel.co.nz/rooms-suites",
+      paragraphs: [
+        "The Governors Suite is spacious enough to let you spread out and enjoy the moment or be used as a comfortable and practical meeting room, with a Super King bed in a separate room and a large dining table in the living area.",
+        "Located upstairs within the hotel with a balcony overlooking Greytown's Main Street. Amenities include free wi-fi, smart TV, tea and coffee, fridge, bath and shower, free onsite parking, plus the usual necessities such as a hair dryer, iron and ironing board.",
+        "The Governors Suite can also have an additional rollaway bed added for an additional charge.",
+      ],
+      cta: "Book your stay",
+      href: WHITE_SWAN_BOOKING_URL,
     },
   ],
   functions: [
     {
       title: "The Captain's Room",
-      image: "/assets/case-studies/white-swan/captains-room.webp",
+      images: ["/assets/case-studies/white-swan/captains-room.webp"],
       alt: "The Captain's Room arranged for a function at The White Swan",
-      description:
+      paragraphs: [
         "An intimate event space presented with visual context, capacity guidance and a direct path to more information.",
-      detail:
         "The same responsive component accepts a different content hierarchy without losing the interaction pattern guests already understand.",
+      ],
       cta: "View functions page",
       href: "https://thewhiteswanhotel.co.nz/functions-conferences",
     },
     {
       title: "Garden Bar",
-      image: "/assets/case-studies/white-swan/garden-bar.webp",
+      images: ["/assets/case-studies/white-swan/garden-bar.webp"],
       alt: "Guests enjoying the Garden Bar at The White Swan",
-      description:
+      paragraphs: [
         "A lively outdoor venue made easy to assess through one image-led, expandable content panel.",
-      detail:
         "Capacity and enquiry details remain readable at mobile size, while the photography retains enough space to communicate the atmosphere.",
+      ],
       cta: "View functions page",
       href: "https://thewhiteswanhotel.co.nz/functions-conferences",
     },
@@ -95,7 +113,216 @@ const sampleMetrics = [
   { label: "Ad clicks", value: "740", change: "+14%" },
 ];
 
+const verifiedMetrics = [
+  {
+    label: "Website sessions",
+    value: "+74%",
+    detail: "31,762 sessions across the reporting window",
+  },
+  {
+    label: "Website accommodation bookings",
+    value: "+26%",
+    detail: "230 direct website bookings",
+  },
+  {
+    label: "Website accommodation revenue",
+    value: "+16%",
+    detail: "Growth versus the comparison period",
+  },
+  {
+    label: "Engagement rate",
+    value: "+23.9%",
+    detail: "Reaching 59.74% across the period",
+  },
+];
+
 const sampleTrend = [34, 46, 42, 58, 53, 69, 64, 78, 74, 88, 82, 94];
+
+function DemoAccordionItem({
+  item,
+  isOpen,
+  panelId,
+  onToggle,
+}: {
+  item: AccordionItem;
+  isOpen: boolean;
+  panelId: string;
+  onToggle: () => void;
+}) {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const imageCount = item.images.length;
+
+  const changeSlide = (direction: number) => {
+    setSlideIndex((current) => (current + direction + imageCount) % imageCount);
+  };
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setLightboxOpen(false);
+      if (event.key === "ArrowLeft" && imageCount > 1) {
+        setSlideIndex((current) => (current - 1 + imageCount) % imageCount);
+      }
+      if (event.key === "ArrowRight" && imageCount > 1) {
+        setSlideIndex((current) => (current + 1) % imageCount);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [imageCount, lightboxOpen]);
+
+  return (
+    <article className={styles.demoItem} data-open={isOpen}>
+      <button
+        className={styles.demoHeader}
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={onToggle}
+      >
+        <h3>{item.title}</h3>
+        <span className={styles.demoAccordionIcon} aria-hidden="true">+</span>
+      </button>
+
+      <div
+        className={styles.demoContent}
+        id={panelId}
+        aria-hidden={!isOpen}
+        inert={!isOpen ? true : undefined}
+      >
+        <div className={styles.demoContentClip}>
+          <div className={styles.demoPanel}>
+            <div className={styles.demoSlider}>
+              <div
+                className={styles.demoSlides}
+                style={{ transform: `translateX(-${slideIndex * 100}%)` }}
+              >
+                {item.images.map((image, index) => (
+                  <div className={styles.demoSlide} key={image}>
+                    <Image
+                      src={image}
+                      alt={index === 0 ? item.alt : `${item.title} gallery image ${index + 1}`}
+                      fill
+                      sizes="(max-width: 700px) 86vw, 320px"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {imageCount > 1 && (
+                <>
+                  <button
+                    type="button"
+                    className={`${styles.demoSliderButton} ${styles.demoPrevious}`}
+                    aria-label={`Previous ${item.title} image`}
+                    onClick={() => changeSlide(-1)}
+                  >
+                    <CaretLeft weight="bold" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.demoSliderButton} ${styles.demoNext}`}
+                    aria-label={`Next ${item.title} image`}
+                    onClick={() => changeSlide(1)}
+                  >
+                    <CaretRight weight="bold" aria-hidden="true" />
+                  </button>
+                </>
+              )}
+
+              <button
+                type="button"
+                className={styles.demoZoomButton}
+                aria-label={`View ${item.title} image full screen`}
+                onClick={() => setLightboxOpen(true)}
+              >
+                <MagnifyingGlassPlus weight="bold" aria-hidden="true" />
+              </button>
+
+              {imageCount > 1 && (
+                <div className={styles.demoSliderDots} aria-label={`${item.title} image selection`}>
+                  {item.images.map((image, index) => (
+                    <button
+                      type="button"
+                      key={image}
+                      aria-label={`Show ${item.title} image ${index + 1}`}
+                      aria-current={slideIndex === index ? "true" : undefined}
+                      onClick={() => setSlideIndex(index)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className={styles.demoCopy}>
+              {item.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <a href={item.href} target="_blank" rel="noreferrer">
+                {item.cta}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {lightboxOpen && (
+        <div
+          className={styles.demoLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${item.title} image gallery`}
+          onClick={() => setLightboxOpen(false)}
+        >
+          <button
+            type="button"
+            className={styles.demoLightboxClose}
+            aria-label="Close image gallery"
+            onClick={() => setLightboxOpen(false)}
+          >
+            <X weight="bold" aria-hidden="true" />
+          </button>
+          {imageCount > 1 && (
+            <>
+              <button
+                type="button"
+                className={`${styles.demoLightboxButton} ${styles.demoLightboxPrevious}`}
+                aria-label="Previous image"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  changeSlide(-1);
+                }}
+              >
+                <CaretLeft weight="bold" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                className={`${styles.demoLightboxButton} ${styles.demoLightboxNext}`}
+                aria-label="Next image"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  changeSlide(1);
+                }}
+              >
+                <CaretRight weight="bold" aria-hidden="true" />
+              </button>
+            </>
+          )}
+          <div className={styles.demoLightboxImage} onClick={(event) => event.stopPropagation()}>
+            <Image
+              src={item.images[slideIndex]}
+              alt={`${item.title} gallery image ${slideIndex + 1}`}
+              fill
+              sizes="90vw"
+            />
+          </div>
+          <span className={styles.demoLightboxCounter}>{slideIndex + 1} / {imageCount}</span>
+        </div>
+      )}
+    </article>
+  );
+}
 
 function ResponsiveDemo() {
   const shellRef = useRef<HTMLDivElement>(null);
@@ -156,7 +383,7 @@ function ResponsiveDemo() {
         </div>
       </div>
 
-      <div ref={shellRef} className={styles.demoShell}>
+      <div ref={shellRef} className={styles.demoShell} data-responsive-demo>
         <div className={styles.demoBrowserBar}>
           <Browser weight="regular" aria-hidden="true" />
           <span>thewhiteswanhotel.co.nz</span>
@@ -171,37 +398,13 @@ function ResponsiveDemo() {
               const isOpen = activeIndex === index;
               const panelId = `${mode}-panel-${index}`;
               return (
-                <article className={styles.demoItem} key={item.title}>
-                  <button
-                    className={styles.demoHeader}
-                    type="button"
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    onClick={() => setActiveIndex(isOpen ? -1 : index)}
-                  >
-                    <span>{item.title}</span>
-                    {isOpen ? <Minus weight="bold" /> : <Plus weight="bold" />}
-                  </button>
-                  {isOpen && (
-                    <div className={styles.demoPanel} id={panelId}>
-                      <div className={styles.demoImage}>
-                        <Image
-                          src={item.image}
-                          alt={item.alt}
-                          fill
-                          sizes="(max-width: 700px) 86vw, 430px"
-                        />
-                      </div>
-                      <div className={styles.demoCopy}>
-                        <p>{item.description}</p>
-                        <p>{item.detail}</p>
-                        <a href={item.href} target="_blank" rel="noreferrer">
-                          {item.cta} <ArrowUpRight weight="bold" />
-                        </a>
-                      </div>
-                    </div>
-                  )}
-                </article>
+                <DemoAccordionItem
+                  key={item.title}
+                  item={item}
+                  isOpen={isOpen}
+                  panelId={panelId}
+                  onToggle={() => setActiveIndex(isOpen ? -1 : index)}
+                />
               );
             })}
           </div>
@@ -289,14 +492,14 @@ export default function WhiteSwanCaseStudy() {
           <figure className={styles.heroVisual} data-case-hero>
             <div>
               <Image
-                src="/assets/illustrations/white-swan-connected-digital-illustration.webp"
-                alt="Concept illustration representing The White Swan website, advertising and reporting work"
+                src="/assets/case-studies/white-swan/white-swan-rooms-accordion-hero.webp"
+                alt="Responsive Deluxe Suites accordion with the Homestead Suite expanded on The White Swan website"
                 fill
                 priority
                 sizes="(max-width: 900px) 100vw, 46vw"
               />
             </div>
-            <figcaption>Connected website, advertising, content and reporting work</figcaption>
+            <figcaption>Responsive Rooms &amp; Suites accordion · Homestead Suite expanded</figcaption>
           </figure>
         </section>
 
@@ -394,9 +597,9 @@ export default function WhiteSwanCaseStudy() {
             <p>My support extended across customer acquisition, content and reporting.</p>
           </div>
           <div className={styles.systemGrid} data-case-reveal>
-            <article><Browser weight="regular" /><h3>Website</h3><p>Responsive content architecture and practical customer journeys.</p></article>
-            <article><ChartLineUp weight="regular" /><h3>Google Ads</h3><p>Campaign support aligned with the hospitality offer.</p></article>
-            <article><SquaresFour weight="regular" /><h3>Reporting</h3><p>A comprehensive Looker Studio dashboard for clearer oversight.</p></article>
+            <article><Browser weight="regular" /><h3>Website</h3><p>Responsive journeys supported 230 website accommodation bookings across the reporting window.</p></article>
+            <article><ChartLineUp weight="regular" /><h3>Google Ads</h3><p>Search campaigns produced about $6.40 in tracked accommodation revenue for every $1 spent.</p></article>
+            <article><SquaresFour weight="regular" /><h3>Reporting</h3><p>Website, booking, search and paid-media outcomes brought into one decision-making view.</p></article>
             <article><Camera weight="regular" /><h3>Content</h3><p>Photography and immersive media that help guests understand the experience.</p></article>
           </div>
         </section>
@@ -405,10 +608,30 @@ export default function WhiteSwanCaseStudy() {
           <div className={styles.reportingIntro} data-case-reveal>
             <h2>Proof without inflated claims.</h2>
             <p>
-              Reporting brings website, search, enquiries and advertising into one view, then turns the patterns into practical next actions.
+              From 1 April to 31 July 2026, the reporting showed stronger traffic, engagement and direct website bookings while helping identify where seasonal campaigns and booking paths could work harder.
             </p>
             <p>
-              This privacy-safe preview recreates the reporting approach with illustrative values. It does not reproduce The White Swan&apos;s client data.
+              The figures below are verified headline outcomes from the supplied reports. The dashboard preview remains illustrative so granular client data stays private.
+            </p>
+          </div>
+
+          <div className={styles.verifiedResults} data-case-reveal>
+            <div className={styles.verifiedResultsHeading}>
+              <p className={styles.eyebrow}>Verified performance</p>
+              <h3>Measured improvement across the connected digital system.</h3>
+              <p>Comparison figures follow the reporting source for 1 April–31 July 2026.</p>
+            </div>
+            <div className={styles.verifiedMetricGrid}>
+              {verifiedMetrics.map((metric) => (
+                <article key={metric.label}>
+                  <span>{metric.label}</span>
+                  <strong>{metric.value}</strong>
+                  <small>{metric.detail}</small>
+                </article>
+              ))}
+            </div>
+            <p className={styles.verifiedResultsNote}>
+              Search advertising also generated approximately 6.4 times its spend in tracked accommodation revenue. Direct-channel gains held through the period, helping reduce reliance on commission-based booking channels.
             </p>
           </div>
 

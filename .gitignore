@@ -2,6 +2,7 @@ node_modules/
 .next/
 .vercel/
 out/
+tmp/
 .env*
 !.env.example
 npm-debug.log*
