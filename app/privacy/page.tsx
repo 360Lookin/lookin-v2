@@ -47,7 +47,7 @@ export default function PrivacyPage() {
         <section>
           <h2>Who is responsible for your information</h2>
           <p>
-            Lookin is operated by Tamron Gardner from 21 Liardet Street, New Plymouth,
+            Lookin is operated by Tamron Galbraith from 21 Liardet Street, New Plymouth,
             New Zealand. Tamron is Lookin&apos;s privacy officer and is responsible for the
             personal information described in this statement.
           </p>

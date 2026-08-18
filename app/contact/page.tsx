@@ -16,7 +16,7 @@ const BOOKING_URL = "https://calendar.app.google/R1LZCQ1HcVA2joeG7";
 export const metadata: Metadata = {
   title: "Contact | Website Design New Plymouth",
   description:
-    "Tell Lookin about your website, content or digital growth project, or book a free Website Discovery Session with Tamron Gardner.",
+    "Tell Lookin about your website, content or digital growth project, or book a free Website Discovery Session with Tamron Galbraith.",
   alternates: {
     canonical: "/contact",
   },

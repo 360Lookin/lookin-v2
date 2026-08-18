@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { JetBrains_Mono, Montserrat, Plus_Jakarta_Sans, Rubik } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -17,6 +17,19 @@ const jetBrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  variable: "--font-rubik",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://lookin.nz"),
   title: {
@@ -26,8 +39,8 @@ export const metadata: Metadata = {
   description:
     "Approachable website design, original content and practical digital growth support for New Plymouth, Taranaki and businesses across New Zealand.",
   applicationName: "Lookin",
-  authors: [{ name: "Tamron Gardner", url: "https://lookin.nz" }],
-  creator: "Tamron Gardner",
+  authors: [{ name: "Tamron Galbraith", url: "https://lookin.nz" }],
+  creator: "Tamron Galbraith",
   publisher: "Lookin",
   category: "Web design and digital marketing",
   formatDetection: {
@@ -65,7 +78,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-NZ" className={`${plusJakarta.variable} ${jetBrainsMono.variable}`}>
+    <html
+      lang="en-NZ"
+      className={`${plusJakarta.variable} ${jetBrainsMono.variable} ${montserrat.variable} ${rubik.variable}`}
+    >
       <body>
         <noscript>
           <iframe

@@ -51,7 +51,7 @@ const structuredData = {
   ],
   founder: {
     "@type": "Person",
-    name: "Tamron Gardner",
+    name: "Tamron Galbraith",
   },
   knowsAbout: [
     "Web design",
