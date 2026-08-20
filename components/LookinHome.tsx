@@ -315,6 +315,27 @@ export default function LookinHome() {
                   <strong className="work-card-action">View case study <ArrowRight weight="bold" /></strong>
                 </div>
               </Link>
+              <Link
+                href="/work/jusea"
+                className="work-card work-card-link"
+                aria-label="View JuSea case study"
+                data-reveal
+              >
+                <div className="work-image work-image-jusea image-hover">
+                  <Image
+                    src="/assets/case-studies/jusea/jusea-hero.webp"
+                    alt="Customers gathered beside the JuSea juice bar at Liardet Street Projects"
+                    fill
+                    sizes="(max-width: 899px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="work-copy">
+                  <p>Food &amp; drink · Online ordering · Loyalty</p>
+                  <h3>JuSea</h3>
+                  <span>A complete ordering and loyalty website designed and developed from the ground up for a New Plymouth juice bar.</span>
+                  <strong className="work-card-action">View case study <ArrowRight weight="bold" /></strong>
+                </div>
+              </Link>
             </div>
           </div>
         </section>
