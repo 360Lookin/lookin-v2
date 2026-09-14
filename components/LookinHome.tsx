@@ -256,6 +256,17 @@ export default function LookinHome() {
               <p>Explore how strategy, design, development, photography and promotion come together to create clearer customer journeys and more useful websites.</p>
             </div>
             <div className="work-list">
+              <Link href="/work/viet-nom-nom" className="work-card work-card-link" aria-label="View Viet Nom Nom food photography" data-reveal>
+                <div className="work-image work-image-photography image-hover">
+                  <Image src="/assets/photography/viet-nom-nom/banh-mi.webp" alt="Bánh mì with fresh herbs, cucumber and chilli photographed for Viet Nom Nom in New Plymouth" fill sizes="(max-width: 899px) 100vw, 50vw" />
+                </div>
+                <div className="work-copy">
+                  <p>Food · Photography · New Plymouth</p>
+                  <h3>Viet Nom Nom</h3>
+                  <span>Fresh colour, crisp detail and food worth a closer look. Professional photography for a local kitchen, with menus, websites and social content in mind.</span>
+                  <strong className="work-card-action">Explore the photography <ArrowRight weight="bold" /></strong>
+                </div>
+              </Link>
               <Link
                 href="/work/the-white-swan"
                 className="work-card work-card-link"
