@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/work/kahakai-poke-bowls`,
-      lastModified,
+      lastModified: new Date("2026-09-15T00:00:00+12:00"),
       changeFrequency: "monthly",
       priority: 0.8,
     },

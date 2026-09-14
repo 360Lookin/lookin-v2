@@ -146,7 +146,7 @@ export default function KahakaiCaseStudy() {
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow} data-kahakai-hero>Kahakai Poké Bowls</p>
             <h1 data-kahakai-hero>Fresh food. Fewer taps.</h1>
-            <p className={styles.heroLede} data-kahakai-hero>A mobile-first food-truck website that moves customers from discovery to menu choice, pickup and delivery.</p>
+            <p className={styles.heroLede} data-kahakai-hero>A mobile-first food-truck website and original video connecting online discovery with fresh food and a real place to visit.</p>
             <div className={styles.heroActions} data-kahakai-hero>
               <a className={styles.primaryButton} href="#mobile-journey">Explore the customer journey <ArrowRight weight="bold" /></a>
               <a className={styles.textLink} href="https://www.kahakaipokebowl.com/menu" target="_blank" rel="noreferrer">View live menu <ArrowUpRight /></a>
@@ -168,7 +168,7 @@ export default function KahakaiCaseStudy() {
 
         <div className={styles.projectFacts} data-kahakai-reveal>
           <div><span>Client</span><strong>Kahakai Poké Bowls</strong></div>
-          <div><span>Contribution</span><strong>Responsive website and mobile customer journey</strong></div>
+          <div><span>Contribution</span><strong>Responsive website, original video and mobile customer journey</strong></div>
           <div><span>Core focus</span><strong>Menu discovery, ordering and local findability</strong></div>
         </div>
 
@@ -177,6 +177,36 @@ export default function KahakaiCaseStudy() {
           <div>
             <p>A food-truck website has only a few seconds to answer what is available, whether it suits the customer and how to order.</p>
             <p>The experience brings those answers forward, then gives a large menu a clear structure that works just as comfortably on a phone.</p>
+          </div>
+        </section>
+
+        <section className={styles.videoSection} id="kahakai-video" aria-labelledby="kahakai-video-title">
+          <div className={styles.videoIntro} data-kahakai-reveal>
+            <p className={styles.eyebrow}>Original video for Kahakai</p>
+            <h2 id="kahakai-video-title">Give visitors a feel for the place.</h2>
+            <p>I created this video for Kahakai and added it to their homepage. It introduces Liardet Street Projects, helping customers see where to find the food truck and what to expect when they visit.</p>
+          </div>
+          <figure className={styles.videoFigure}>
+            <div className={styles.videoPlayer}>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/5vc27OFncfo"
+                title="Kahakai video created by Tamron at Lookin"
+                width="1280"
+                height="720"
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+            <figcaption>Video by Tamron / Lookin for Kahakai Poké Bowls.</figcaption>
+          </figure>
+          <div className={styles.videoContext}>
+            <p>Alongside the menu, ordering links and location details, the video makes the setting part of the customer journey. Original content and website design work together to introduce the business before a customer arrives.</p>
+            <div className={styles.videoLinks}>
+              <a className={styles.textLink} href="https://www.kahakaipokebowl.com/" target="_blank" rel="noreferrer">See it on Kahakai’s homepage <ArrowUpRight aria-hidden="true" /></a>
+              <a className={styles.textLink} href="https://www.youtube.com/watch?v=5vc27OFncfo" target="_blank" rel="noreferrer">Watch on YouTube <ArrowUpRight aria-hidden="true" /></a>
+            </div>
           </div>
         </section>
 

@@ -30,6 +30,18 @@
 .challenge h2, .sectionHeading h2, .builderIntro h2, .menuHeading h2, .localCopy h2, .finalCta h2 { margin: 0; font-size: clamp(3.2rem, 5.7vw, 6.3rem); font-weight: 500; line-height: .94; letter-spacing: -.04em; }
 .challenge p, .builderIntro p, .menuHeading p, .localCopy p { margin: 0 0 20px; color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
 .journeySection { padding: 150px 0; background: var(--deep); color: #fff; }
+.videoSection { width: var(--content); margin: 0 auto 140px; scroll-margin-top: 32px; }
+.videoIntro { max-width: 870px; margin-bottom: 42px; }
+.videoIntro h2 { margin: 0; font-size: clamp(2.8rem, 5.2vw, 5.4rem); font-weight: 500; line-height: 1.02; letter-spacing: -.04em; }
+.videoIntro > p:last-child, .videoContext > p { max-width: 740px; margin: 26px 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
+.videoFigure { margin: 0; }
+.videoPlayer { overflow: hidden; aspect-ratio: 16 / 9; border-radius: var(--card-radius); background: #111827; }
+.videoPlayer iframe { display: block; width: 100%; height: 100%; border: 0; }
+.videoFigure figcaption { margin-top: 14px; color: var(--muted); font-size: .82rem; }
+.videoLinks { display: flex; flex-wrap: wrap; gap: 20px 32px; margin-top: 26px; }
+.videoLinks a { min-height: 44px; }
+.videoLinks svg { flex-shrink: 0; }
+.videoLinks a:focus-visible { outline: 3px solid var(--forest); outline-offset: 5px; }
 .sectionHeading, .journeySection > div:last-child { width: var(--content); margin-inline: auto; }
 .sectionHeading { display: grid; grid-template-columns: 1.3fr .7fr; column-gap: 80px; align-items: end; margin-bottom: 70px; }
 .sectionHeading .eyebrow { grid-column: 1 / -1; color: var(--coral); }
@@ -127,6 +139,11 @@
 }
 
 @media (max-width: 760px) {
+  .videoSection { margin-bottom: 90px; }
+  .videoIntro { margin-bottom: 30px; }
+  .videoIntro h2 { font-size: clamp(2.6rem, 11vw, 4.6rem); }
+  .videoIntro > p:last-child, .videoContext > p { font-size: 1rem; }
+  .videoLinks { flex-direction: column; align-items: flex-start; gap: 12px; }
   .header { height: 76px; }
   .header nav > a:first-child { display: none; }
   .headerCta { min-height: 42px; padding: 9px 13px; font-size: .78rem; }

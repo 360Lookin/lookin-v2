@@ -320,9 +320,9 @@ export default function LookinHome() {
                   </div>
                 </div>
                 <div className="work-copy">
-                  <p>Food · Website design and development</p>
+                  <p>Food · Website design and development · Video</p>
                   <h3>Kahakai Poké Bowls</h3>
-                  <span>A fresh digital home for a New Plymouth food truck at Liardet Street Projects.</span>
+                  <span>A fresh digital home and original video for a New Plymouth food truck at Liardet Street Projects.</span>
                   <strong className="work-card-action">View case study <ArrowRight weight="bold" /></strong>
                 </div>
               </Link>
