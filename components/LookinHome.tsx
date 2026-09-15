@@ -220,6 +220,7 @@ export default function LookinHome() {
               <h3>Grow</h3>
               <p>Practical promotion and measurement that shows what is working.</p>
               <ul><li>Google Ads and SEO</li><li>Conversion tracking</li><li>Reporting dashboards</li></ul>
+              <Link className="text-link" href="/google-hotel-ads">Google Hotel Ads for hotels <ArrowRight aria-hidden="true" /></Link>
             </article>
             <article className="service-card service-support" data-reveal>
               <span className="service-number">03</span>

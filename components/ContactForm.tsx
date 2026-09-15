@@ -69,6 +69,7 @@ export default function ContactForm() {
             <option>Website design and development</option>
             <option>Photography and video</option>
             <option>Google Ads and digital growth</option>
+            <option>Google Hotel Ads setup and management</option>
             <option>Website support and improvements</option>
             <option>Not sure yet</option>
           </select>

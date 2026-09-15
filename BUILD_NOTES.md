@@ -1,5 +1,21 @@
 # Lookin Launch Build Notes
 
+## Google Hotel Ads service page
+
+### Actual Google booking screenshots
+
+- Added the two screenshots supplied on 15 September 2026 to a new `#booking-examples` section after the Hotel Ads explainer. Desktop focuses on the booking panel; mobile removes the status bar and account-management area. Ad labels, badges, dates, rates and competing options remain unchanged.
+- Cropped previews and full originals are stored as lossless WebP under `public/assets/case-studies/white-swan/hotel-ads/`. The previews total approximately 226 KB, retain original pixels and load lazily. Originals remain available through clearly labelled new-tab links; no generative editing was used.
+- Added descriptive alt text, visible keyboard focus, enlarge links and captions explaining sponsored versus free booking links. The caption notes different travel dates and variable rates/placements without presenting screenshots as revenue evidence.
+- Validation for this update: production build, lint and standalone typecheck passed. Browser checks at 1366px and 390px verified image loading, layout without horizontal overflow and keyboard focus. The enlarged mobile asset rendered successfully; all four asset URLs returned HTTP 200 with image/webp content type.
+
+- Added `/google-hotel-ads` for New Plymouth hotel owners, with a plain-language explanation, direct-booking benefits, White Swan experience, setup and management scope, FAQs and contact links. Added home Grow-section discovery, a contact-form service option, metadata and sitemap entry.
+- Preserved Lookin typography, wordmark, purple/red palette and local WebP hospitality photography. Page uses server-rendered content, native keyboard-operable FAQ disclosures, responsive layouts and dark-mode tokens. Design dials: DESIGN_VARIANCE 6, MOTION_INTENSITY 2, VISUAL_DENSITY 3.
+- Google product facts checked against https://support.google.com/google-ads/answer/9238461?hl=en and https://support.google.com/hotelprices/answer/10472393?hl=en on 15 September 2026. No commission bidding, guaranteed placement, pricing or booking uplift promised.
+- Important evidence distinction: existing temporary report extracts at `tmp/pdfs/white-swan-reports/report1.txt` and `report2.txt` show zero Hotel Ads-attributed accommodation bookings in the reported periods; successful Search Ads results are a different channel. The page therefore features White Swan Hotel Ads experience without claiming proven booking growth. Newer verified Hotel Ads results, dates and approved client wording would strengthen the case study. Private reports are not copied into public assets.
+- Setup and management pricing, advertising budget, provider fees and launch timing are scoped by enquiry rather than invented.
+- Validation: lint and production build passed. An initial standalone TypeScript run overlapped route-type generation; rerunning after generation passed. Desktop (1366px) and mobile (390px) browser checks verified loaded imagery, readable layout, FAQ expansion and keyboard collapse, and the contact destination with the new service option. No live enquiry was submitted. Dark-mode tokens are implemented; dark-mode emulation and Lighthouse measurements were not available in this browser workflow.
+
 ## Viet Nom Nom photography showcase
 
 - Added `/work/viet-nom-nom` and a feature in the home page’s Connected digital work section.
