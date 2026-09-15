@@ -1,0 +1,7 @@
+.pricing { margin-bottom: 38px; }
+.price { margin: 14px 0 0; font-size: clamp(3rem, 5vw, 4.2rem); line-height: 1.2; letter-spacing: -.05em; color: var(--forest); }
+.price span { font-size: 1rem; letter-spacing: 0; }
+.frequency { margin: 8px 0 24px; font-size: .9rem; color: var(--muted); }
+.budget { border-top: 1px solid var(--line); padding-top: 30px; max-width: 850px; }
+.budget p, .exclusions { color: var(--muted); font-size: .94rem; }
+.exclusions { max-width: 850px; margin: 22px 0 28px; }

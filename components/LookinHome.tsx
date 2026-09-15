@@ -118,6 +118,7 @@ export default function LookinHome() {
         </a>
         <nav className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Main navigation">
           <a href="#services" onClick={() => setMenuOpen(false)}>What I do</a>
+          <Link href="/google-ads" onClick={() => setMenuOpen(false)}>Google Ads</Link>
           <Link className="nav-feature" href="/google-hotel-ads" onClick={() => setMenuOpen(false)}>
             Google Hotel Ads
           </Link>
@@ -223,6 +224,7 @@ export default function LookinHome() {
               <h3>Grow</h3>
               <p>Practical promotion and measurement that shows what is working.</p>
               <ul><li>Google Ads and SEO</li><li>Conversion tracking</li><li>Reporting dashboards</li></ul>
+              <Link className="text-link" href="/google-ads">Google Ads setup &amp; pricing <ArrowRight aria-hidden="true" /></Link>
               <Link className="text-link" href="/google-hotel-ads">Google Hotel Ads for hotels <ArrowRight aria-hidden="true" /></Link>
             </article>
             <article className="service-card service-support" data-reveal>

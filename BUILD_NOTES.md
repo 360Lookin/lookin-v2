@@ -1,5 +1,18 @@
 # Lookin Launch Build Notes
 
+## Google Ads service page — 16 September 2026
+
+- Added `/google-ads`, homepage navigation and Grow-section links, canonical/social metadata and a sitemap entry. The existing Google Ads contact-form option already covers this service.
+- Proposed market-informed Lookin pricing: setup from NZ$499 + GST once; management from NZ$399 + GST/month. Google media spend is separate and paid directly to Google. The example totals NZ$1,898 for month one and NZ$1,399 thereafter with NZ$1,000 media spend, before GST.
+- Starting scope: one business, one target region, up to two Search campaigns and up to NZ$2,000 monthly media spend. These are Lookin package choices, not a claim that competitors offer identical scope. Includes keyword research, ad creation, standard enquiry tracking, weekly management checks and monthly reporting/review. More complex work, landing-page builds, product feeds, specialist campaign types and paid tools are quoted separately. Setup-only work is available; service terms are agreed in the proposal.
+- Public NZ provider benchmarks checked on 16 September 2026:
+  - [Adhesion’s current pricing](https://www.adhesion.co.nz/digital-marketing/google-ads): setup from $499; monthly management $339 for up to $600 ad spend, $399 for up to $900, and $529 for up to $2,000. Excludes GST. Its older April 2025 brochure was also checked, but the live page takes precedence.
+  - [Kiwi Web Design FAQ](https://kiwiwebdesign.co.nz/faq/): setup from $499 and management from $399/month; GST treatment is not specified alongside that FAQ answer.
+  - [Sherman Digital packages](https://www.shermandigital.nz/packages/google-ads): management-only package $497 setup and $297/week, NZD excluding GST and media spend. Weekly fee is approximately $1,287 per calendar month using 52/12; broader agency positioning means this is context, not a like-for-like package.
+- The selected price sits toward the accessible small-business end of this sample; it is not a statistical NZ market average. Competitor research is kept in these notes rather than placing competitor sales links in the customer journey.
+- Preserved existing service-page styling, Plus Jakarta typography, purple/red palette, Phosphor icons and the existing local WebP portrait of Tamron. Reuses the Hotel Ads page’s CSS module for consistent shared patterns, with a small pricing-specific module. Design dials: variance 6, motion 2, density 3. No invented client metrics, certifications or guarantees.
+- Validation: production build, lint and typecheck passed. Browser checks at 1366px and 390px verified the new page and pricing layout without horizontal overflow, loaded portrait, pricing anchor, FAQ click/keyboard toggle and contact destination. Homepage mobile-menu navigation to the new page and 1024px desktop navigation were checked. No browser console errors observed. No enquiry submitted. Dark-mode tokens and reduced-motion rules are inherited; dark-mode emulation and Lighthouse were not run.
+
 ## Google Hotel Ads service page
 
 ### Actual Google booking screenshots

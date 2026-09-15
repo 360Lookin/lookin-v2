@@ -6,6 +6,12 @@ const lastModified = new Date("2026-08-17T00:00:00+12:00");
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
+      url: `${baseUrl}/google-ads`,
+      lastModified: new Date("2026-09-16T00:00:00+12:00"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/google-hotel-ads`,
       lastModified: new Date("2026-09-15T00:00:00+12:00"),
       changeFrequency: "monthly",
