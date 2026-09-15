@@ -9,6 +9,11 @@
 - Added descriptive alt text, visible keyboard focus, enlarge links and captions explaining sponsored versus free booking links. The caption notes different travel dates and variable rates/placements without presenting screenshots as revenue evidence.
 - Validation for this update: production build, lint and standalone typecheck passed. Browser checks at 1366px and 390px verified image loading, layout without horizontal overflow and keyboard focus. The enlarged mobile asset rendered successfully; all four asset URLs returned HTTP 200 with image/webp content type.
 
+### Homepage navigation
+
+- Added a prominent `Google Hotel Ads` link to the main homepage navigation immediately after `What I do`. It uses a soft purple treatment on desktop and remains visually distinct inside the mobile menu while preserving the existing booking call to action as the strongest control.
+- Validation: lint, standalone TypeScript and production build passed. Browser checks verified the highlighted desktop link, the expanded 390px mobile menu, and successful navigation to `/google-hotel-ads`.
+
 - Added `/google-hotel-ads` for New Plymouth hotel owners, with a plain-language explanation, direct-booking benefits, White Swan experience, setup and management scope, FAQs and contact links. Added home Grow-section discovery, a contact-form service option, metadata and sitemap entry.
 - Preserved Lookin typography, wordmark, purple/red palette and local WebP hospitality photography. Page uses server-rendered content, native keyboard-operable FAQ disclosures, responsive layouts and dark-mode tokens. Design dials: DESIGN_VARIANCE 6, MOTION_INTENSITY 2, VISUAL_DENSITY 3.
 - Google product facts checked against https://support.google.com/google-ads/answer/9238461?hl=en and https://support.google.com/hotelprices/answer/10472393?hl=en on 15 September 2026. No commission bidding, guaranteed placement, pricing or booking uplift promised.

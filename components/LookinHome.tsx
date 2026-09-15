@@ -118,6 +118,9 @@ export default function LookinHome() {
         </a>
         <nav className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Main navigation">
           <a href="#services" onClick={() => setMenuOpen(false)}>What I do</a>
+          <Link className="nav-feature" href="/google-hotel-ads" onClick={() => setMenuOpen(false)}>
+            Google Hotel Ads
+          </Link>
           <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
           <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
