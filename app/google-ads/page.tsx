@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function GoogleAdsPage() {
   return (
     <div className={styles.page}>
-      <a className={styles.skipLink} href="#ads-content">Skip to content</a>
+      <a className={styles.skipLink} href="#main-content">Skip to content</a>
       <header className={styles.header}>
         <Link href="/" className={styles.wordmark} aria-label="Lookin home">look<span>in</span><i>.</i></Link>
         <nav aria-label="Google Ads navigation">
@@ -37,7 +37,7 @@ export default function GoogleAdsPage() {
           <Link href="/contact" className={styles.navCta}>Let’s talk <ArrowRight aria-hidden="true" /></Link>
         </nav>
       </header>
-      <main id="ads-content">
+      <main id="main-content">
         <section className={styles.hero}>
           <div>
             <p className={styles.eyebrow}>Google Ads setup &amp; management</p>
